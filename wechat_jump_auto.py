@@ -8,6 +8,7 @@ import random
 import json
 import re
 
+flag = 0
 
 # === 思路 ===
 # 核心：每次落稳之后截图，根据截图算出棋子的坐标和下一个块顶面的中点坐标，
@@ -178,7 +179,25 @@ def find_piece_and_board(im):
 
     if not all((board_x, board_y)):
         return 0, 0, 0, 0
+###########################fix shift#########################
+    global flag #jump to right
+    if board_x >562.5 :####screen width should be 1280
+        if flag ==1:
+            bx_before=board_x-(board_x - 562.5)*2
+            fix_x = piece_x - bx_before
+            board_x=board_x+fix_x
+            board_y=board_y+fix_x* math.sqrt(3) / 3
 
+        flag = 0
+
+    if board_x <=562.5:
+        if flag ==0:
+            bx_before=board_x+( 562.5-board_x )*2
+            fix_x = bx_before-piece_x
+            board_x=board_x-fix_x
+            board_y=board_y-fix_x* math.sqrt(3) / 3
+        flag = 1
+##################################################################
     return piece_x, piece_y, board_x, board_y
 
 
