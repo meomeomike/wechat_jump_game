@@ -30,7 +30,7 @@ import re
 
 def open_accordant_config():
     screen_size = _get_screen_size()
-    config_file = "./config/{screen_size}/config.json".format(
+    config_file = "./config/1920x1080/config.json".format(
         screen_size=screen_size
     )
     if os.path.exists(config_file):
@@ -108,7 +108,7 @@ def set_button_position(im):
 
 
 def jump(distance):
-    press_time = math.pow(distance,0.85) * press_coefficient
+    press_time = math.pow(distance,1) * press_coefficient
     press_time = max(press_time, 200)   # 设置 200 ms 是最小的按压时间
     press_time = int(press_time)
     cmd = 'adb shell input swipe {} {} {} {} {}'.format(swipe_x1, swipe_y1, swipe_x2, swipe_y2, press_time)
