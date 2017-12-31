@@ -30,9 +30,7 @@ import re
 
 def open_accordant_config():
     screen_size = _get_screen_size()
-    config_file = "./config/1920x1080/config.json".format(
-        screen_size=screen_size
-    )
+    config_file = "./config/1920x1080/config.json"
     if os.path.exists(config_file):
         with open(config_file, 'r') as f:
             print("Load config file from {}".format(config_file))
@@ -170,7 +168,7 @@ def find_piece_and_board(im):
                 continue
 
             # 修掉圆顶的时候一条线导致的小 bug，这个颜色判断应该 OK，暂时不提出来
-            if abs(pixel[0] - last_pixel[0]) + abs(pixel[1] - last_pixel[1]) + abs(pixel[2] - last_pixel[2]) > 50:
+            if abs(pixel[0] - last_pixel[0]) + abs(pixel[1] - last_pixel[1]) + abs(pixel[2] - last_pixel[2]) >30:
                 board_x_sum += j
                 board_x_c += 1
         if board_x_sum:
