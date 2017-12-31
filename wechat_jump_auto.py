@@ -104,7 +104,8 @@ def set_button_position(im):
     w, h = im.size
     left = w / 2
     top = 1003 * (h / 1280.0) + 10
-    swipe_x1, swipe_y1, swipe_x2, swipe_y2 = left, top, left, top
+    dx,dy=int(random.gauss(0,5)),int(random.gauss(0,5))
+    swipe_x1, swipe_y1, swipe_x2, swipe_y2 = left+dx, top+dy, left+dx, top+dy
 
 
 def jump(distance):
@@ -169,7 +170,7 @@ def find_piece_and_board(im):
                 continue
 
             # 修掉圆顶的时候一条线导致的小 bug，这个颜色判断应该 OK，暂时不提出来
-            if abs(pixel[0] - last_pixel[0]) + abs(pixel[1] - last_pixel[1]) + abs(pixel[2] - last_pixel[2]) > 10:
+            if abs(pixel[0] - last_pixel[0]) + abs(pixel[1] - last_pixel[1]) + abs(pixel[2] - last_pixel[2]) > 50:
                 board_x_sum += j
                 board_x_c += 1
         if board_x_sum:
@@ -196,7 +197,7 @@ def main():
         if is_debug:
             save_debug_creenshot(ts, im, piece_x, piece_y, board_x, board_y)
             backup_screenshot(ts)
-        time.sleep(random.uniform(1, 1.1))   # 为了保证截图的时候应落稳了，多延迟一会儿
+        time.sleep(random.uniform(1.7, 2))   # 为了保证截图的时候应落稳了，多延迟一会儿
 
 
 if __name__ == '__main__':
